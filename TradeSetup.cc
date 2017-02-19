@@ -23,10 +23,7 @@ float ModelData::standarddev() {
 	
 }
 
-UIUX::UIUX (int width,int height) {
-	h=height;
-	w=width;
-}
+UIUX::UIUX (int width,int height): h(height), w(width) {};
 
 void ReadDataFile(ModelData &data) {
    char fileName[80] = "tradingData.dat";
