@@ -206,64 +206,64 @@ void Smiley(int button, int state, int x, int y) {
 			//Clean up the axis
 			realtimeheaders();
 			
-				move(0, account.price[1][dataset], AXES);
-				for (int i=1; i<51; i++) {
-					
-					//Realtime graph
-					if (account.price[i][dataset]<account.price[i-1][dataset]) {
-							color (RED);
-						}
-					if (account.price[i][dataset]>account.price[i-1][dataset]) {
-							color (GREEN);
-						}
-						
-					//Draw the graph
-					draw(i, account.price[i][dataset], AXES);
-					
-					//Realtime transactions
-					color(GREEN);
-					int xvalue = 70, yvalue = 395, adder = 65, Day = i, yminus = 14, resety = 0;
-					
-					//second header
-					if (i>25) {
-						color(WHITE);
-						xvalue = xvalue + 4*adder+30;
-						resety = 25* yminus;
-						text("Day", xvalue, yvalue+5);
-						text("Price", xvalue+adder, yvalue+5);
-						text("stock", xvalue+2*adder, yvalue+5);
-						text("balance", xvalue+3*adder, yvalue+5);
-						color(GREEN);
+			move(0, account.price[1][dataset], AXES);
+			for (int i=1; i<51; i++) {
+
+				//Realtime graph
+				if (account.price[i][dataset]<account.price[i-1][dataset]) {
+						color (RED);
 					}
-					
-					//print the realtime transactions by line
-					stringstream tempday;
-					tempday << Day;
-					text(tempday.str(), xvalue, yvalue-i*yminus + resety);
-					stringstream price;
-					price << account.price[i][dataset];
-					text(price.str(), xvalue+adder, yvalue-i*yminus + resety);
-					stringstream stock;
-					stock << account.stock[i][dataset];
-					text(stock.str(), xvalue+2*adder, yvalue-i*yminus + resety);
-					stringstream balance;
-					balance << account.balance[i][dataset];
-					text(balance.str(), xvalue+3*adder, yvalue-i*yminus + resety);
-					
-					//realtime balance
-					sumbalance = account.balance[i][dataset];
+				if (account.price[i][dataset]>account.price[i-1][dataset]) {
+						color (GREEN);
+					}
+
+				//Draw the graph
+				draw(i, account.price[i][dataset], AXES);
+
+				//Realtime transactions
+				color(GREEN);
+				int xvalue = 70, yvalue = 395, adder = 65, Day = i, yminus = 14, resety = 0;
+
+				//second header
+				if (i>25) {
 					color(WHITE);
-					filledrectangle(700,250,100,25);
-					stringstream sumbal;
-					sumbal << sumbalance;
-					color(BLACK);
-					text(sumbal.str(), 708, 258);
-					
-					//Timed plotting
-					usleep(100000);
-						}
+					xvalue = xvalue + 4*adder+30;
+					resety = 25* yminus;
+					text("Day", xvalue, yvalue+5);
+					text("Price", xvalue+adder, yvalue+5);
+					text("stock", xvalue+2*adder, yvalue+5);
+					text("balance", xvalue+3*adder, yvalue+5);
+					color(GREEN);
+				}
+
+				//print the realtime transactions by line
+				stringstream tempday;
+				tempday << Day;
+				text(tempday.str(), xvalue, yvalue-i*yminus + resety);
+				stringstream price;
+				price << account.price[i][dataset];
+				text(price.str(), xvalue+adder, yvalue-i*yminus + resety);
+				stringstream stock;
+				stock << account.stock[i][dataset];
+				text(stock.str(), xvalue+2*adder, yvalue-i*yminus + resety);
+				stringstream balance;
+				balance << account.balance[i][dataset];
+				text(balance.str(), xvalue+3*adder, yvalue-i*yminus + resety);
+
+				//realtime balance
+				sumbalance = account.balance[i][dataset];
+				color(WHITE);
+				filledrectangle(700,250,100,25);
+				stringstream sumbal;
+				sumbal << sumbalance;
+				color(BLACK);
+				text(sumbal.str(), 708, 258);
+
+				//Timed plotting
+				usleep(100000);
 			}
 		}
+	}
 }
 
 void presskey(unsigned char C, int x, int y) {	
@@ -402,7 +402,8 @@ void leastSquares () {
 	data.b = ( data.numPoints*sxy - sx*sy ) / ( data.numPoints*sxx - sx*sx );
 
 }
-	
+
+//calculate min, max & deviations from linear model
 void CalStats () {
 	
 		float maxresidual=0, minresidual=1000;
