@@ -31,13 +31,12 @@ void ReadDataFile(ModelData &data) {
    int day;
    float price;
 
-   // Associate file name with fin object of class ifstream
+   //open file
    ifstream fin;
    fin.open(fileName);
 
-   // Prompt for new file name if not able to open
-   while(!fin.good())
-   {
+   //check / reopen
+   while(!fin.good()) {
       cout << "Unable to open trading data file. Enter a new name: ";
       cin >> fileName;
       fin.clear();
@@ -45,8 +44,7 @@ void ReadDataFile(ModelData &data) {
    }
 
    data.numPoints = number;
-   for(int i=0; i< number; i++)
-   {   
+   for(int i=0; i< number; i++) {   
      fin >> day >> price;
      data.x[i] = day;
      data.y[i] = price;
@@ -55,8 +53,9 @@ void ReadDataFile(ModelData &data) {
    fin.close();
 }
 
-void mygraphics(int w, int h) {//w and h are 1500,900 
-	//Make graphics object
+//w and h are 1500,900 
+void mygraphics(int w, int h) {
+	//GUI object
 	UIUX GUI(w,h);
 
 	//color it grey
