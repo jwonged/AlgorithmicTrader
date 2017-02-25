@@ -31,13 +31,13 @@ void InitialiseAccount(int dataSet, int id, int codeNumber, TradingAccount &acco
 
 
 void MyTrader(TradingAccount &account, ModelData &data, int dataset) {
-    //Get predicted price 
+    //Get predicted price from least squares model
 	float predictedprice[100];
 	for (int i=0; i<100; i++) {
 		predictedprice[i] = 20 + (data.b * i);
 	}
      
-     //Trade for 49 days with algo
+     //Trade for 49 days 
     for (int i=1; i<50; i++) {
 		
 		//Get today's price
@@ -45,7 +45,7 @@ void MyTrader(TradingAccount &account, ModelData &data, int dataset) {
 		HandleExitCode(TE_GetPrice(i, account.price[i][dataset]));
 		
 	
-		// Determine on transaction and volume
+		// Determine transaction and volume
 		float buyprice;
 		
 		if (account.price[i][dataset] > predictedprice[i+1]) {
@@ -123,7 +123,6 @@ void MyTrader(TradingAccount &account, ModelData &data, int dataset) {
      
 }
 
-// Display error messages from trading exchange, -1 on error
 void HandleExitCode(int errorCode)
 {
    switch(errorCode)
