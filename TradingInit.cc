@@ -24,7 +24,7 @@ void InitialiseAccount(int dataSet, int id, int codeNumber, TradingAccount &acco
    account.stock[day][dataset] = 0;
    account.balance[day][dataset] = 20000.0;
 
-   // Call trading library function and handle exit (return) code
+   // Call trading library and handle exit (return) code
    ec = TE_InitialiseTrading(dataSet, id, codeNumber, account.commission);
    HandleExitCode(ec);
 }
@@ -40,12 +40,12 @@ void MyTrader(TradingAccount &account, ModelData &data, int dataset) {
      //Trade for 49 days with algo
     for (int i=1; i<50; i++) {
 		
-		// Call library function to get today's price
+		//Get today's price
 		account.today++;
 		HandleExitCode(TE_GetPrice(i, account.price[i][dataset]));
 		
 	
-		// Decide on transaction and volume - only buy if price is higher than tmr's predicted
+		// Determine on transaction and volume
 		float buyprice;
 		
 		if (account.price[i][dataset] > predictedprice[i+1]) {
@@ -77,7 +77,7 @@ void MyTrader(TradingAccount &account, ModelData &data, int dataset) {
 			}
 		}
 
-		// Make the Trade
+		// Make Trade
 		int ec;
 		ec = TE_Trade(account.transaction[i][dataset], account.volume[i][dataset]);
 		HandleExitCode(ec); 
@@ -123,8 +123,7 @@ void MyTrader(TradingAccount &account, ModelData &data, int dataset) {
      
 }
 
-// Function definition to display error messages from trading exchange
-// The program is terminated with exit(-1) if there is an error
+// Display error messages from trading exchange, -1 on error
 void HandleExitCode(int errorCode)
 {
    switch(errorCode)
@@ -176,7 +175,6 @@ void HandleExitCode(int errorCode)
 
 
 float ConcludeAcc(TradingAccount &account, int dataset) {
-	//float final_balance, final_stock;
 	float final_balance;
 	int final_stock;
 	int ec = TE_CloseTrading(final_balance, final_stock); 
