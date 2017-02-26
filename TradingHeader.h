@@ -1,17 +1,6 @@
 // OurTradingHeader.h
-// Project header file for trading exercise. Contains definitions of constants,
-// data structures and function declarations (prototypes)
-// Included at top of all project files
-//Lab Group 74 - Donte and Joshua Wong
 
-// Constants
-const int MAXSIZE = 100;
-const int LABGROUP = 999; // you need to change this
-const int SECURITYCODE = 999; // you need to change this
-
-
-// User definition of a data structure for least squares analysis
-// x, y and residual are arrays of type float
+// Data for least squares analysis
 class ModelData{
  public:
    int numPoints;
@@ -27,7 +16,6 @@ class ModelData{
    float standarddev();
 };
 
-// User definition of a data structure for the trading accounts
 class TradingAccount{
  public:
    int today;
@@ -45,23 +33,23 @@ class TradingAccount{
 class UIUX {
 	public:
 		int w, h;
-		UIUX (int width,int height); //constructor to take in window width and height
+		UIUX (int width,int height); 
 		void yellowsmile();
 		void pasthundred();
 };
 
-// User-defined function declarations for part 1
+// UIUX and Modelling functions
 void ReadDataFile(ModelData &data);
 void mygraphics(int w, int h);
 void CalStats ();
 void leastSquares();
 void Smiley(int button, int state, int x, int y); // for click functions
-void realtimeheaders(); // Print headers for realtime graph
-void presskey(unsigned char C, int x, int y); //function for the press keys
+void realtimeheaders(); 
+void presskey(unsigned char C, int x, int y); 
 
 
 
-// User-defined function declarations for part 2
+// Trade set up and intialise
 void InitialiseAccount(int dataSet, int labGroup, int SecurityCode, TradingAccount &account, int dataset);
 void HandleExitCode(int errorCode);
 void MyTrader(TradingAccount &account, ModelData &data, int dataset);
